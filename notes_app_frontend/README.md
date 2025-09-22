@@ -1,82 +1,36 @@
-# Lightweight React Template for KAVIA
+# Notes App Frontend (React) — Ocean Professional
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, minimalist notes application UI with blue and amber accents. Optional Supabase integration for persistence; falls back to localStorage when not configured.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Ocean Professional theme (blue & amber accents, subtle gradients)
+- Create, edit, delete personal notes
+- Grid/List toggle, search
+- Floating action button, modal editor
+- Optional Supabase backend; otherwise localStorage mock
 
-## Getting Started
+## Quick Start
 
-In the project directory, you can run:
+1. Install dependencies
+   - npm install
+2. Run the app
+   - npm start
+3. Optional: configure Supabase
+   - Copy `.env.example` to `.env`
+   - Fill `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_KEY`
+   - Restart dev server
 
-### `npm start`
+## Scripts
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- npm start — start dev server
+- npm test — run tests
+- npm run build — build production bundle
 
-### `npm test`
+## Supabase
 
-Launches the test runner in interactive watch mode.
+See SUPABASE.md for details and schema.
 
-### `npm run build`
+## Style
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All custom styles are in `src/App.css`. Components use light, rounded surfaces with subtle shadows and transitions to match the Ocean Professional aesthetic.

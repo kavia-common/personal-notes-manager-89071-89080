@@ -1,48 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useMemo, useState } from 'react';
 import './App.css';
+import { NotesProvider } from './context/NotesContext';
+import Header from './components/Header';
+import NotesView from './components/NotesView';
+import NoteEditorModal from './components/NoteEditorModal';
+import FloatingActionButton from './components/FloatingActionButton';
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  /** Root shell composing header, content, and modal editor. */
+  const [query, setQuery] = useState('');
+  const [view, setView] = useState('grid'); // 'grid' | 'list'
+  const [editorState, setEditorState] = useState({ open: false, note: null });
 
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+  const handleCreate = () => setEditorState({ open: true, note: null });
+  const handleEdit = (note) => setEditorState({ open: true, note });
+  const handleClose = () => setEditorState({ open: false, note: null });
 
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+  const filters = useMemo(() => ({ query }), [query]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NotesProvider>
+      <div className="app-shell">
+        <Header query={query} onQueryChange={setQuery} />
+        <main className="content">
+          <div className="toolbar">
+            <div className="view-toggle" role="group" aria-label="Toggle view">
+              <button
+                className={`btn ${view === 'grid' ? 'btn-primary' : 'btn-ghost'}`}
+                onClick={() => setView('grid')}
+                aria-pressed={view === 'grid'}
+              >
+                Grid
+              </button>
+              <button
+                className={`btn ${view === 'list' ? 'btn-primary' : 'btn-ghost'}`}
+                onClick={() => setView('list')}
+                aria-pressed={view === 'list'}
+              >
+                List
+              </button>
+            </div>
+            <div className="muted" style={{ color: 'var(--muted)' }}>
+              Ocean Professional · Blue & Amber accents
+            </div>
+          </div>
+
+          <NotesView view={view} filters={filters} onEdit={handleEdit} />
+        </main>
+
+        <FloatingActionButton onClick={handleCreate} />
+
+        <NoteEditorModal
+          open={editorState.open}
+          initialNote={editorState.note}
+          onClose={handleClose}
+        />
+      </div>
+    </NotesProvider>
   );
 }
 
