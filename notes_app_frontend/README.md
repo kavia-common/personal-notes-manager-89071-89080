@@ -21,15 +21,22 @@ A modern, minimalist notes application UI with blue and amber accents. Optional 
    - Fill `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_KEY`
    - Restart dev server
 
+## Validate Supabase Integration
+
+- Ensure `.env` includes:
+  - REACT_APP_SUPABASE_URL
+  - REACT_APP_SUPABASE_KEY
+- Table `public.notes` should exist. Our automation also created permissive RLS policies for demos.
+- When env vars are set, creating/editing/deleting notes will call Supabase (observe Network calls to /rest/v1/notes).
+- Without env vars, the app stores notes in browser localStorage.
+
+See SUPABASE.md for full details, schema, and production hardening tips.
+
 ## Scripts
 
 - npm start — start dev server
 - npm test — run tests
 - npm run build — build production bundle
-
-## Supabase
-
-See SUPABASE.md for details and schema.
 
 ## Style
 
